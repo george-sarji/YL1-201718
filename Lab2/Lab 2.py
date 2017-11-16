@@ -32,6 +32,12 @@ def returnCommon(list1, list2):
 
 # Exercise four
 
+def isPrime(num):
+    for i in range(2, int(num/2+1)):
+        if(num%i==0):
+            return False
+    return True
+
 # Test cases
 
 a1 = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
