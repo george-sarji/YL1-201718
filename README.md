@@ -16,3 +16,7 @@
 ## Lab 4 - <a href="https://docs.google.com/document/d/1kWsv1c33vjEybFQM5WGeCXJxNCcj5otVh_tjr2cQjJk/edit?usp=sharing">ACCESS</a>:
 	* OOP
 	* Classes
+
+## Lab 5 - <a href="https://docs.google.com/document/d/1ue_LfyuHEmse2K9c12KGuGW0tbo4donm0vOrNlkgVuM/edit?usp=sharing">ACCESS</a>:
+	* Inheritance
+	* Turtle poly
