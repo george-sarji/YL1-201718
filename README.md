@@ -20,3 +20,9 @@
 ## Lab 5 - <a href="https://docs.google.com/document/d/1ue_LfyuHEmse2K9c12KGuGW0tbo4donm0vOrNlkgVuM/edit?usp=sharing">ACCESS</a>:
 	* Inheritance
 	* Turtle poly
+
+## Lab 6 - <a href="https://docs.google.com/document/d/1h2FEaCFtmExn2BGL_16wnc2KAkUnlueiwiCtyOaL5Hk/edit?usp=sharing">ACCESS</a>:
+	* Ball Collisions
+	* Turtle inheritance
+	* Lists
+	* Dictionaries
