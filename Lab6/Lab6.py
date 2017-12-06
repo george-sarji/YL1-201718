@@ -64,9 +64,8 @@ ballsList.append(second_ball)
 ballsList.append(Ball(20, "purple", 0))
 
 def check_collisions(ballsList):
-	for ball1 in ballsList:
-		for ball2 in ballsList:
-			if(ball1!=ball2):
-				check_collision(ball1, ball2)
+	for index1 in range(len(ballsList)):
+		for index2 in range(len(index1+1, ballsList)):
+			check_collision(ball1, ball2)
 
 
