@@ -22,8 +22,8 @@ class Ball(Turtle):
         bottom_side_ball = new_y - self.dy
         self.goto(new_x, new_y)
         if(right_side_ball>=screen_width or left_side_ball<=-screen_width):
-            self.dx = -self.dx
+            self.dx*=-1
+            self.clear()
         if(top_side_ball>=screen_height or bottom_side_ball<=-screen_height):
-            self.dy=-self.dy
-            
-myBall = Ball(0, 0, 1, 4, 15, "blue")
+            self.dy*=-1
+            self.clear()

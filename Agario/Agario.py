@@ -1,19 +1,25 @@
 import turtle
 import time
 import random
-from Ball import *
+from ball1 import *
 import math
 
+
+turtle.tracer(0)
 turtle.hideturtle()
 RUNNING = True
+STARTED = False
 SLEEP = 0.0077
 SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
 
 # Part 0
 
-MY_BALL = Ball(50, 50, 0 ,0 ,50, "yellow")
+MY_BALL = Ball(0, 0, 0 ,0 ,random.randint(0, 100), "black")
 
+STARTER_RADIUS = 25
+WINNER_RADIUS = 90
+SCORE = 0
 NUMBER_OF_BALLS = 5
 MINIMUM_BALL_RADIUS = 10
 MAXIMUM_BALL_RADIUS = 100
@@ -21,6 +27,11 @@ MINIMUM_BALL_DX = -5
 MAXIMUM_BALL_DX = 5
 MINIMUM_BALL_DY = -5
 MAXIMUM_BALL_DY = 5
+
+WRITER = Turtle()
+WRITER.ht()
+WRITER.pu()
+WRITER.goto(0, 0)
 
 BALLS = []
 
@@ -30,7 +41,7 @@ for index in range(NUMBER_OF_BALLS):
 	dx = random.randint(MINIMUM_BALL_DX, MAXIMUM_BALL_DX)
 	dy = random.randint(MINIMUM_BALL_DY, MAXIMUM_BALL_DY)
 	radius = random.randint(MINIMUM_BALL_RADIUS, MAXIMUM_BALL_RADIUS)
-	color = "blue"
+	color = (random.random(), random.random(), random.random())
 	print("Added ball "+str(index))
 	print("radius: "+str(radius))
 	print("X" + str(x))
@@ -95,10 +106,7 @@ def check_myball_collision():
 		if(collide(MY_BALL, ball)):
 			ball_radius = ball.r
 			my_radius = MY_BALL.r
-			if(my_radius<ball_radius):
-				print("False")
-				return False
-			else:
+			if(my_radius>=ball_radius):
 				x = random.randint(int(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS), int(SCREEN_WIDTH - MAXIMUM_BALL_RADIUS))
 				y = random.randint(int(-SCREEN_HEIGHT + MAXIMUM_BALL_RADIUS), int(SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS))
 				dx = random.randint(MINIMUM_BALL_DX, MAXIMUM_BALL_DX)
@@ -117,29 +125,49 @@ def check_myball_collision():
 				ball.color(color)
 				MY_BALL.r+=1
 				MY_BALL.shapesize(MY_BALL.r/10)
-	print("True")
+				
+			else:
+				return False
 	return True
 
 # Part 5
 
 def movearound(event):
-	MY_BALL.goto(event.x - SCREEN_WIDTH, SCREEN_WIDTH + event.y)
+	MY_BALL.goto(event.x - SCREEN_WIDTH, SCREEN_HEIGHT - event.y)
 
 # Part 5.1
+
+def Run():
+	global RUNNING, STARTED, SCREEN_WIDTH, SCREEN_HEIGHT, turtle, MY_BALL, MAXIMUM_BALL_RADIUS
+	while(RUNNING == True):
+		if(SCREEN_WIDTH != turtle.getcanvas().winfo_width()/2 or SCREEN_HEIGHT != turtle.getcanvas().winfo_height()/2):
+			SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
+			SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
+		move_all_balls()
+		check_all_balls_collision()
+		MY_BALL.move(SCREEN_WIDTH, SCREEN_HEIGHT)
+		RUNNING = check_myball_collision() and MY_BALL.r<=MAXIMUM_BALL_RADIUS
+		time.sleep(SLEEP)
+		turtle.update()
+		if(not RUNNING):
+			WRITER.write("Game over!\nPress space to restart!", font=("Arial", 20, "bold"), align="center")
+
+def start():
+	WRITER.clear()
+	global STARTED, RUNNING
+	STARTED = True
+	RUNNING = True
+	Run()
+
+onkey(start, "space")
+
 
 turtle.getcanvas().bind("<Motion>", movearound)
 turtle.listen()
 
 
 
-while RUNNING:
-	if(SCREEN_WIDTH != turtle.getcanvas().winfo_width()/2 or SCREEN_HEIGHT != turtle.getcanvas().winfo_height()/2):
-		SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
-		SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
-	move_all_balls()
-	check_all_balls_collision()
-	MY_BALL.move(SCREEN_WIDTH, SCREEN_HEIGHT)
-	RUNNING = check_myball_collision()
-	time.sleep(SLEEP)
+WRITER.write("Press Spacebar to begin the game!", font=("Arial", 20, "bold"), align="center")	
 		
+
 mainloop()
